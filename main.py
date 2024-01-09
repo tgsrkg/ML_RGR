@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score
 from tensorflow.keras.models import load_model
 
 
-model_path = 'C:/Users/бумбурурик)/Desktop/ML/РГР/Models/'
+model_path = 'Models/'
 
 # Загрузка датасета
 cs_data = pd.read_csv('Data/csgo.csv')
