@@ -96,13 +96,13 @@ def page_data_visualization():
     # Визуализация 1: Сравнение счёта команд
     fig, ax = plt.subplots()
     sns.boxplot(data=cs_data[['ct_score', 't_score']], ax=ax)
-    ax.set_title('Счёт команд: ')
+    ax.set_title('Счёт команд')
     st.pyplot(fig)
 
     # Визуализация 2: Количество денег у обеих команд
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.lineplot(data=cs_data, x='index', y='ct_money', label='CT Money', ax=ax)
-    sns.lineplot(data=cs_data, x='index', y='t_money', label='T Money', ax=ax)
+    sns.lineplot(data=cs_data, x='index', y='ct_money', label='Деньги спецназа', ax=ax)
+    sns.lineplot(data=cs_data, x='index', y='t_money', label='Деньги террористов', ax=ax)
     ax.set_title('Количество денег у команд в разных раундах')
     ax.set_xlabel('Номер раунда')
     ax.set_ylabel('Деньги')
@@ -112,8 +112,8 @@ def page_data_visualization():
     # Визуализация 3: Распределение здоровья команд
     fig, ax = plt.subplots()
 
-    sns.histplot(cs_data['ct_health'], kde=True, label='CT Health', ax=ax)
-    sns.histplot(cs_data['t_health'], kde=True, label='T Health', ax=ax)
+    sns.histplot(cs_data['ct_health'], kde=True, label='Здоровье спецназа', ax=ax)
+    sns.histplot(cs_data['t_health'], kde=True, label='Здьоровье террорирстов', ax=ax)
     ax.set_title('Здоровье обеих команд: ')
     ax.legend()
     st.pyplot(fig)
@@ -121,8 +121,8 @@ def page_data_visualization():
 
     # Визуализация 4: Общий уровень брони команд
     fig, ax = plt.subplots()
-    sns.kdeplot(cs_data['ct_armor'], shade=True, label='CT Armor', ax=ax)
-    sns.kdeplot(cs_data['t_armor'], shade=True, label='T Armor', ax=ax)
+    sns.kdeplot(cs_data['ct_armor'], shade=True, label='Броня спецназа', ax=ax)
+    sns.kdeplot(cs_data['t_armor'], shade=True, label='Броня террорирстов', ax=ax)
     ax.set_title('Броня у обеих команд: ')
     ax.legend()
     st.pyplot(fig)
