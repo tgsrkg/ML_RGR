@@ -22,7 +22,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 def models():
     model1 = pickle.load(open(model_path + 'model_ml1.pkl', 'rb'))
     model2 = pickle.load(open(model_path + 'model_ml2.pkl', 'rb'))
-    model3 = XGBClassifier()
+    model3 = XGBClassifier(n_clusters=15)
     model3.load_model(model_path + 'model_ml3.json')
     model4 = pickle.load(open(model_path + 'model_ml4.pkl', 'rb'))
     model5 = pickle.load(open(model_path + 'model_ml5.pkl', 'rb'))
