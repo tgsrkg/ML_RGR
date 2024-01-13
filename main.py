@@ -141,11 +141,9 @@ def page_predictions():
 
         # Интерактивные поля для ввода данных
         input_data = {}
-        feature_names =  ['index','time_left','ct_score','t_score','ct_health','t_health','ct_armor','t_armor','ct_money','t_money','ct_helmets','t_helmets','ct_defuse_kits','ct_players_alive','t_players_alive']
-        feature_describe = ['Номер','Осталось времени','Счёт спецаназа','Счёт террорирстов','Здоровье спецаназа','Здоровье террорирстов','Броня спецаназа','Броня террорирстов','Деньги спецназа','Деньги террористов','Шлемы спецаназа','Шлемы террорирстов','Набор сапёра у спецаназа','Живых у спецаназа','Живых у террорирстов']
-         for feature_describe in feature_names:   
-            for feature in feature_names:
-                input_data[feature] = st.number_input(f"{feature} ({feature_descirbe})", min_value=0.0, max_value=100000.0, value=100.0)
+        feature_names =  ['index','time_left','ct_score','t_score','ct_health','t_health','ct_armor','t_armor','ct_money','t_money','ct_helmets','t_helmets','ct_defuse_kits','ct_players_alive','t_players_alive']   
+        for feature in feature_names:
+            input_data[feature] = st.number_input(f"{feature} ({feature_descirbe})", min_value=0.0, max_value=100000.0, value=100.0)
 
         if st.button('Сделать предсказание'):
             # Загрузка моделей
