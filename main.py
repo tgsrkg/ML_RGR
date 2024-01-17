@@ -102,10 +102,10 @@ def page_data_visualization():
 
     # Визуализация 2: Количество денег у обеих команд
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.lineplot(data=cs_data, x='index', y='ct_money', label='Деньги спецназа', ax=ax)
-    sns.lineplot(data=cs_data, x='index', y='t_money', label='Деньги террористов', ax=ax)
-    ax.set_title('Количество денег у команд в разных раундах')
-    ax.set_xlabel('Номер раунда')
+    sns.lineplot(data=cs_data, x='ct_players_alive', y='ct_money', label='Деньги спецназа', ax=ax)
+    sns.lineplot(data=cs_data, x='t_players_alive', y='t_money', label='Деньги террористов', ax=ax)
+    ax.set_title('Количество денег у команд')
+    ax.set_xlabel('Живых игроков')
     ax.set_ylabel('Деньги')
     ax.legend()
     st.pyplot(fig)
