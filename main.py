@@ -14,6 +14,7 @@ model_path = 'Models/'
 
 # Загрузка датасета
 cs_data = pd.read_csv('Data/csgo.csv')
+cs_data.drop('index', axis=1, inplace=True)
 X = cs_data.drop(['bomb_planted_True'], axis=1)
 y = cs_data['bomb_planted_True']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -141,9 +142,10 @@ def page_predictions():
 
         # Интерактивные поля для ввода данных
         input_data = {}
-        feature_names =  ['index','time_left','ct_score','t_score','ct_health','t_health','ct_armor','t_armor','ct_money','t_money','ct_helmets','t_helmets','ct_defuse_kits','ct_players_alive','t_players_alive']   
-        for feature in feature_names:
-            input_data[feature] = st.number_input(f"{feature}", min_value=0.0, max_value=100000.0, value=10.0)
+        feature_names =  ['time_left','ct_score','t_score','ct_health','t_health','ct_armor','t_armor','ct_money','t_money','ct_helmets','t_helmets','ct_defuse_kits','ct_players_alive','t_players_alive']
+        feature_rus = ['Время до конца раунда', 'Счёт спецназовцев', 'Счёт террористов', 'Здоровье спецназовцев', 'Здоровье террористов', 'Броня спецназовцев', 'Броня террористов', 'Деньги спецназовцев', 'Деньги террористов', 'Шлемы у спецназовцев', 'Шлемы у террористов', 'Набора сапёра у спецназовцев', 'Живых спецназовцев', 'Живых террористов']  
+        for index, feature in enumerate(feature_names):
+            input_data[feature] = st.number_input(f"{feature_rus[index]}", min_value=0.0, max_value=100000.0, value=5.0)
 
         if st.button('Сделать предсказание'):
             # Загрузка моделей
@@ -166,12 +168,12 @@ def page_predictions():
             prediction_ml6 = (model_ml6.predict(scaled_input) > 0.5).astype(int)
 
             # Вывод результатов
-            st.success(f"Результат предсказания LogisticRegression: {prediction_ml1[0]}")
-            st.success(f"Результат предсказания KMeans: {prediction_ml2[0]}")
-            st.success(f"Результат предсказания XGBClassifier: {prediction_ml3[0]}")
-            st.success(f"Результат предсказания BaggingClassifier: {prediction_ml4[0]}")
-            st.success(f"Результат предсказания StackingClassifier: {prediction_ml5[0]}")
-            st.success(f"Результат предсказания нейронной сети Tensorflow: {prediction_ml6[0]}")
+            st.success(f"Результат предсказания LogisticRegression: {'Бомба заложена' if prediction_ml1[0]  == 1 else 'Бомба не заолжена'}")
+            st.success(f"Результат предсказания KMeans: {'Бомба заложена' if prediction_ml2[0]  == 1 else 'Бомба не заолжена'}")
+            st.success(f"Результат предсказания XGBClassifier: {'Бомба заложена' if prediction_ml3[0]  == 1 else 'Бомба не заолжена'}")
+            st.success(f"Результат предсказания BaggingClassifier: {'Бомба заложена' if prediction_ml4[0]  == 1 else 'Бомба не заолжена'}")
+            st.success(f"Результат предсказания StackingClassifier: {'Бомба заложена' if prediction_ml5[0]  == 1 else 'Бомба не заолжена'}")
+            st.success(f"Результат предсказания нейронной сети Tensorflow: {'Бомба заложена' if prediction_ml6[0]  == 1 else 'Бомба не заолжена'}")
     else:
         try:
             model_ml1 = pickle.load(open(model_path + 'model_ml1.pkl', 'rb'))
